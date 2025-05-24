@@ -4,9 +4,16 @@ spring:
   application:
     name: "configserver"
   profiles:
-    active: native
+    active: git
+  ##active: native
   cloud:
     config:
       server:
-        native:
-          search-locations: classpath:/config,file:///C://projects//SpringBoot//EazyBankMSProject//spring-cloud-config-server//config
+        git:
+          uri: "https://github.com/eazybytes/eazybytes-config.git"
+          clone-on-start: true
+          timeout: 5
+          default-label: main
+          force-pull: true
+        ##native:
+        ##  search-locations: classpath:/config,file:///C://projects//SpringBoot//EazyBankMSProject//spring-cloud-config-server//config
