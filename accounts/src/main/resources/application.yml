@@ -21,3 +21,8 @@ spring:
   profiles:
     active:
       - "qa"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
