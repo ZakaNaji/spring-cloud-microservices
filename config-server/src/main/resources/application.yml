@@ -17,7 +17,7 @@ spring:
           force-pull: true
         ##native:
         ##  search-locations: classpath:/config,file:///C://projects//SpringBoot//EazyBankMSProject//spring-cloud-config-server//config
-  ##rabbitMQ config omited (spring boot will use defaults)
+
 management:
   endpoints:
     web:
