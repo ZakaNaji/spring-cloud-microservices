@@ -1,10 +1,8 @@
 package com.eazybytes.accounts.controller;
 
+import com.eazybytes.accounts.client.LoansClient;
 import com.eazybytes.accounts.constants.AccountsConstants;
-import com.eazybytes.accounts.dto.AccountsContactInfoDto;
-import com.eazybytes.accounts.dto.CustomerDto;
-import com.eazybytes.accounts.dto.ErrorResponseDto;
-import com.eazybytes.accounts.dto.ResponseDto;
+import com.eazybytes.accounts.dto.*;
 import com.eazybytes.accounts.service.IAccountsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -37,9 +35,11 @@ import org.springframework.web.bind.annotation.*;
 public class AccountsController {
 
     private final IAccountsService iAccountsService;
+    private final LoansClient loansClient;
 
-    public AccountsController(IAccountsService iAccountsService) {
+    public AccountsController(IAccountsService iAccountsService, LoansClient loansClient) {
         this.iAccountsService = iAccountsService;
+        this.loansClient = loansClient;
     }
 
     @Value("${build.version}")
@@ -250,6 +250,11 @@ public class AccountsController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(accountsContactInfoDto);
+    }
+
+    @GetMapping("/fetch-loans")
+    public ResponseEntity<LoansDto> getLoans(@RequestParam String mobileNumber) {
+        return loansClient.fetchLoanDetails(mobileNumber);
     }
 
 
